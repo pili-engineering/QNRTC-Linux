@@ -1,0 +1,7 @@
+arm/
+build.*/
+build_for_arm.sh
+arm.std
+tests
+*.log
+
