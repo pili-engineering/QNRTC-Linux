@@ -5,7 +5,7 @@
 #include "util.h"
 #include "callback.h"
 
-static char* app_id = "d8lk7l4ed";
+static char* app_id = "d8dre8w1p";
 static char* room_id = "ggtest";
 static char* user_id = "linux_demo";
 static char room_token[1024] = {0};
