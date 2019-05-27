@@ -18,7 +18,7 @@ endif()
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/../Release/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/curl/install/${ARCH}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/curl/install/${ARCH}/include
 )
 
 set(SOURCE_FILES
@@ -30,9 +30,9 @@ set(SOURCE_FILES
 link_directories(
     ${link_directories}
     ${CMAKE_CURRENT_SOURCE_DIR}/../Release/lib/${ARCH}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/curl/install/${ARCH}/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/boringssl/install/${ARCH}/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/boringssl/install/${ARCH}/lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/curl/install/${ARCH}/lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl/install/${ARCH}/lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl/install/${ARCH}/lib
 )
 
 link_libraries(
