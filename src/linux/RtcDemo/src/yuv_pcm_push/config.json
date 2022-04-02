@@ -1,0 +1,16 @@
+{
+  "audio": {
+    "path":"/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/src/linux/RtcDemo/resources/44100_16bits_2channels_little.pcm",
+    "sample_rate":44100,
+    "bits_per_sample": 16,
+    "channels":2,
+    "big_endian": false
+  },
+  "video": {
+    "path":"/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/src/linux/RtcDemo/resources/426x240.yuv",
+    "type":"yuv420p",
+    "width":426,
+    "height":240,
+    "fps": 30
+  }
+}
