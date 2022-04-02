@@ -1,4 +1,4 @@
-# QNRTCWin Release Notes for 5.0.0
+# QNRTC Release Notes for 5.0.0
 
 ## 简介
 QNRTCLinux 是七牛云推出的一款适用于 Linux 平台的实时音视频 SDK，提供了灵活的接口，支持高度定制以及二次开发。
