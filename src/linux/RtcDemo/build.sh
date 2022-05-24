@@ -5,6 +5,9 @@ build() {
 
   PLATFORM_ABI=$1
   case $PLATFORM_ABI in
+    "arm_linux_gnueabihf")
+      TOOLCHAIN_FILE="$CURRENT/toolchain/arm_linux_gnueabihf.toolchain.cmake"
+      ;;
     "x86_64")
       TOOLCHAIN_FILE="$CURRENT/toolchain/x86_64.toolchain.cmake"
       ;;
@@ -20,3 +23,4 @@ build() {
 }
 
 build x86_64
+# build arm_linux_gnueabihf

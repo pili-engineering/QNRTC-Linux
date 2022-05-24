@@ -1,4 +1,4 @@
-#include "json.hpp"
+#include "../config.h"
 #include "simple_client.h"
 
 #include <cassert>
@@ -51,8 +51,10 @@ class VideoTalk : public SimpleClient {
 
 public:
   explicit VideoTalk() {
-    camera_pub_callback_ = make_unique<PubCallback>(&ctx_, true);
-    mic_pub_callback_ = make_unique<PubCallback>(&ctx_, false);
+    camera_pub_callback_ =
+        std::unique_ptr<PubCallback>(new PubCallback(&ctx_, true));
+    mic_pub_callback_ =
+        std::unique_ptr<PubCallback>(new PubCallback(&ctx_, false));
   }
 
   ~VideoTalk() {
@@ -285,22 +287,23 @@ void print_cmd() {
 }
 
 int main(int argc, char *argv[]) {
+  Config config;
+  assert(!config.app.app_id.empty());
+  assert(!config.app.room_name.empty());
+
   string version;
   QNRTC::GetVersion(version);
   cout << "SDK 版本:" << version << endl;
 
   QNRTCSetting setting;
   QNRTC::Init(setting, nullptr);
-  // 禁止 log 打印
-  // QNRTC::SetLogFile(
-  //     QNLogLevel::kLogInfo,
-  //     "/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/src/linux/RtcDemo",
-  //     "qn-rtc-demo.log");
+  QNRTC::SetLogFile(QNLogLevel::kLogInfo, config.app.log_dir,
+                    "qn-rtc-demo.log");
 
   std::string token;
-   GetRoomToken_s("d8lk7l4ed", "linux_sdk", "linux_demo", "api-demo.qnsdk.com",
-                  100000, token);
-  auto video_talk = make_unique<VideoTalk>();
+  GetRoomToken_s(config.app.app_id, config.app.room_name, "linux_demo_video_talk",
+                 "api-demo.qnsdk.com", 10000, token);
+  unique_ptr<VideoTalk> video_talk = unique_ptr<VideoTalk>(new VideoTalk());
   print_cmd();
 
   while (true) {

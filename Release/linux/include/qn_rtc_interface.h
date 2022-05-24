@@ -61,6 +61,7 @@ struct QNCustomVideoTrackConfig {
   QNVideoEncoderConfig encoder_config;
   std::string tag;             // 自定义标签
   bool multi_profile_enabled;  // 是否开启多流
+  QNVideoFrameType frame_type; // 数据源类型
 };
 
 class QINIU_EXPORT_DLL QNRTCEventListener {

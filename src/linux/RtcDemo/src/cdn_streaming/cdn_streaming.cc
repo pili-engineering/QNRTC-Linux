@@ -1,4 +1,5 @@
 #include "simple_client.h"
+#include "../config.h"
 #include <cassert>
 #include <endian.h>
 #include <iostream>
@@ -170,20 +171,22 @@ void print_cmd() {
 }
 
 int main(int argc, char *argv[]) {
+  Config config;
+  assert(!config.app.app_id.empty());
+  assert(!config.app.room_name.empty());
+
   string version;
   QNRTC::GetVersion(version);
   cout << "SDK 版本:" << version << endl;
 
   QNRTCSetting setting;
   QNRTC::Init(setting, nullptr);
-  // QNRTC::SetLogFile(
-  //     QNLogLevel::kLogInfo,
-  //     "/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/src/linux/RtcDemo",
-  //     "qn-rtc-demo.log");
+  QNRTC::SetLogFile(QNLogLevel::kLogInfo, config.app.log_dir,
+                    "qn-rtc-demo.log");
 
   std::string token;
-  GetRoomToken_s("d8lk7l4ed", "linux_sdk", "linux_demo", "api-demo.qnsdk.com",
-                 100000, token);
+  GetRoomToken_s(config.app.app_id, config.app.room_name, "linux_demo_streaming",
+                 "api-demo.qnsdk.com", 10000, token);
   CdnStreaming client;
   client.Join(token, "");
   print_cmd();
@@ -206,5 +209,4 @@ int main(int argc, char *argv[]) {
       print_cmd();
     }
   }
-  cout << "cdm streaming demo exit" << endl;
 }

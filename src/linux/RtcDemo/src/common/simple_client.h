@@ -6,8 +6,6 @@ GetRoomToken_s(const std::string &app_id_, const std::string &room_name_,
                const std::string &user_id_, const std::string &host_name_,
                const int time_out_, std::string &token_);
 
-
-
 class SimpleClient : public qiniu::QNClientEventListener,
                      public qiniu::QNRTCEventListener {
 public:
