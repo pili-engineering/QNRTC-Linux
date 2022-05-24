@@ -4,17 +4,11 @@ project(qn-rtc-demo)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -std=c++11")
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../third_party/json/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/common)
-
-if (DEFINED SDK_SOURCE_PATH)
-  add_subdirectory(${SDK_SOURCE_PATH} QNRtcEngine)
-else()
-  include_directories(${SDK_INCLUDE_PATH})
-  link_directories(${SDK_LIB_PATH})
-endif()
+include_directories(${SDK_INCLUDE_PATH})
+link_directories(${SDK_LIB_PATH})
 
 set(COMMON_LIBS qn_rtc
   pthread
@@ -56,3 +50,17 @@ target_link_libraries(
   PRIVATE
   ${COMMON_LIBS}
   )
+
+# h264 pcm push
+add_executable(h264_pcm_push
+        ${CMAKE_CURRENT_LIST_DIR}/h264_pcm_push/h264_pcm_push.cc
+        ${CMAKE_CURRENT_LIST_DIR}/h264_pcm_push/h264_file_parser.cc
+        ${CMAKE_CURRENT_LIST_DIR}/h264_pcm_push/h264_util.cc
+        ${CMAKE_CURRENT_LIST_DIR}/common/simple_client.cc
+        )
+
+target_link_libraries(
+        h264_pcm_push
+        PRIVATE
+        ${COMMON_LIBS}
+)

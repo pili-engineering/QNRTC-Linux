@@ -67,7 +67,8 @@ enum QNVideoFrameType {
   kMJPEG,
   kNV21,
   kNV12,
-  kBGRA
+  kBGRA,
+  kH264Raw,
 };
 
 // 表示原始视频数据的旋转角度，主要用于对原始视频数据进行处理的功能接口中
@@ -112,7 +113,8 @@ enum QNConnectionState {
 };
 
 enum QNVideoEncoderType {
-  kEncodeOpenH264  // 默认 Open264 编码器
+  kEncodeOpenH264,  // 默认 Open264 编码器
+  kExternal,
 };
 
 //跨房转推状态

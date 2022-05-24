@@ -2,11 +2,32 @@
 #include <cassert>
 #include <iostream>
 #include <mutex>
+#include <csignal>
+#include <execinfo.h>
 
 using namespace std;
 using namespace qiniu;
 
+static void SystemErrorHandler(int signum) {
+  const int len = 1024;
+  void *func[len];
+  size_t size;
+  int i;
+  char **funs;
+
+  signal(signum, SIG_DFL);
+  size = backtrace(func, len);
+  funs = (char **)backtrace_symbols(func, size);
+  fprintf(stderr, "System error, Stack trace:\n");
+  for (i = 0; i < size; ++i)
+    fprintf(stderr, "%d %s \n", i, funs[i]);
+  free(funs);
+  // exit(1);
+}
+
 SimpleClient::SimpleClient() {
+  signal(SIGSEGV, SystemErrorHandler);
+  signal(SIGABRT, SystemErrorHandler);
   // 创建 Client 用于音视频会话
   client_ = QNRTC::CreateClient(this);
   // 自动订阅远端音视频
@@ -15,6 +36,8 @@ SimpleClient::SimpleClient() {
 
 SimpleClient::~SimpleClient() {
   QNRTC::DestroyClient(client_);
+  signal(SIGSEGV, SystemErrorHandler);
+  signal(SIGABRT, SystemErrorHandler);
 }
 
 void SimpleClient::OnConnectionStateChanged(
