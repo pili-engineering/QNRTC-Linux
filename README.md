@@ -108,7 +108,7 @@ QNRTC 是七牛云推出的一款适用于 Linux 平台的实时音视频 SDK，
 
 ## 8.1 如何体验 Demo？
 
-您可以通过使用 `build.sh` 脚本进行编译后，打开 `bin/video_talk`，体验通话效果。
+您可以通过使用 `build.sh $ARCH` 脚本进行编译后，打开 `bin/video_talk`，体验通话效果。
 
 ## 8.2 实时通话功能是否收费？
 
