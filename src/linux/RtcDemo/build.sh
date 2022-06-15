@@ -11,6 +11,10 @@ build() {
     "x86_64")
       TOOLCHAIN_FILE="$CURRENT/toolchain/x86_64.toolchain.cmake"
       ;;
+    *)
+      echo "unknoown PLATFORM_ABI"
+      exit 1
+      ;;
   esac
 
   rm -rf build/$PLATFORM_ABI
@@ -22,5 +26,5 @@ build() {
   cd build/$PLATFORM_ABI && make -j8 || exit 1
 }
 
-build x86_64
-# build arm_linux_gnueabihf
+# $1 x86_64 arm_linux_gnueabihf
+build $1
