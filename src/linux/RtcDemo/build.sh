@@ -8,6 +8,9 @@ build() {
     "arm_linux_gnueabihf")
       TOOLCHAIN_FILE="$CURRENT/toolchain/arm_linux_gnueabihf.toolchain.cmake"
       ;;
+    "arm_linux_muslgnueabi")
+      TOOLCHAIN_FILE="$CURRENT/toolchain/arm_linux_muslgnueabi.toolchain.cmake"
+      ;;
     "x86_64")
       TOOLCHAIN_FILE="$CURRENT/toolchain/x86_64.toolchain.cmake"
       ;;

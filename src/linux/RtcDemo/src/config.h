@@ -12,7 +12,7 @@ struct AppConfig {
 };
 
 struct AudioConfig {
-  std::string path = "/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/Resources/44100_16bits_2channels_little.pcm";
+  std::string path = "/home/phelps/Workspace/qiniu/pili-rtc-pc-kit/Resources/44100_16bits_2channels_little.pcm";
   int sample_rate = 44100;
   int bits_per_sample = 16;
   int channels = 2;
@@ -20,14 +20,14 @@ struct AudioConfig {
 };
 
 struct YUVVideoConfig {
-  std::string path = "/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/Resources/426x240_25.yuv";
+  std::string path = "/home/phelps/Workspace/qiniu/pili-rtc-pc-kit/Resources/426x240_25.yuv";
   int width = 426;
   int height = 240;
   int fps = 25;
 };
 
 struct H264VideoConfig {
-  std::string path = "/home/phelps-ubuntu/workspace/qiniu/pili-rtc-pc-kit/Resources/540x960_30.h264";
+  std::string path = "/home/phelps/Workspace/qiniu/pili-rtc-pc-kit/Resources/540x960_30.h264";
   int width = 540;
   int height = 960;
   int fps = 30;

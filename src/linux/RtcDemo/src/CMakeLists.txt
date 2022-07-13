@@ -3,8 +3,8 @@ project(qn-rtc-demo)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -std=c++11")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -g -std=c++11")
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/common)
 include_directories(${SDK_INCLUDE_PATH})

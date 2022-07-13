@@ -68,7 +68,7 @@ enum QNVideoFrameType {
   kNV21,
   kNV12,
   kBGRA,
-  kH264Raw,
+  kH264Raw
 };
 
 // 表示原始视频数据的旋转角度，主要用于对原始视频数据进行处理的功能接口中
@@ -114,7 +114,7 @@ enum QNConnectionState {
 
 enum QNVideoEncoderType {
   kEncodeOpenH264,  // 默认 Open264 编码器
-  kExternal,
+  kExternal
 };
 
 //跨房转推状态
@@ -195,6 +195,16 @@ struct QNAudioDeviceInfo {
   bool is_default;   // 此设备是否为默认设备
 };
 
+// 水印参数
+struct QNVideoWaterMark {
+  // 设置水印图片在显示控件中的位置显示控件的左上角为原
+  // 点【 0.0，0.0】，右下角为【 1.0，1.0 】
+  uint32_t x;  // 图片 X 坐标值 【 0.0 - 1.0 】
+  uint32_t y;  // 图片 Y 坐标值 【 0.0 - 1.0 】
+  uint32_t size;  // 设置水印图片在视频中的相对大小，范围( 0.0 - 1.0 ]
+  uint32_t alpha;  // 设置水印图片的透明度, 【 0-255 】
+};
+
 // merge job 配置信息
 struct MergeJobInfo {
   std::string job_id;
@@ -238,7 +248,7 @@ struct QNTranscodingLiveStreamingConfig {
   int32_t bitrate;                                   // 合流码率bps
   int32_t min_bitrate;                               // 最小码率
   int32_t max_bitrate;                               // 最大码率
-  bool is_hold_last_frame;  // 合流停止时是否保持最后一帧画面
+  bool is_audio_only;       // 是否是纯音频合流任务
   QNStretchMode stretch_mode = kStretchFill;  // 合流画面填充模式
 };
 

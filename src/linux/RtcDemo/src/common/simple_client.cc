@@ -3,11 +3,12 @@
 #include <iostream>
 #include <mutex>
 #include <csignal>
-#include <execinfo.h>
+//#include <execinfo.h>
 
 using namespace std;
 using namespace qiniu;
 
+/**
 static void SystemErrorHandler(int signum) {
   const int len = 1024;
   void *func[len];
@@ -24,10 +25,11 @@ static void SystemErrorHandler(int signum) {
   free(funs);
   // exit(1);
 }
+*/
 
 SimpleClient::SimpleClient() {
-  signal(SIGSEGV, SystemErrorHandler);
-  signal(SIGABRT, SystemErrorHandler);
+ // signal(SIGSEGV, SystemErrorHandler);
+ // signal(SIGABRT, SystemErrorHandler);
   // 创建 Client 用于音视频会话
   client_ = QNRTC::CreateClient(this);
   // 自动订阅远端音视频
@@ -36,8 +38,8 @@ SimpleClient::SimpleClient() {
 
 SimpleClient::~SimpleClient() {
   QNRTC::DestroyClient(client_);
-  signal(SIGSEGV, SystemErrorHandler);
-  signal(SIGABRT, SystemErrorHandler);
+ // signal(SIGSEGV, SystemErrorHandler);
+ // signal(SIGABRT, SystemErrorHandler);
 }
 
 void SimpleClient::OnConnectionStateChanged(
