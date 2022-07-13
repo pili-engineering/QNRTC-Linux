@@ -52,9 +52,6 @@ struct QNCameraVideoTrackConfig {
   std::string id;              // 设备 id
   std::string tag;             // 自定义标签
   bool multi_profile_enabled;  // 是否开启多流
-#if defined(QN_ANDROID) || defined(QN_IOS)
-  QNCameraFacing camera_facing;  // 前后置摄像头
-#endif
 };
 
 struct QNCustomVideoTrackConfig {

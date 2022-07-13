@@ -2,6 +2,8 @@
 #define QN_TRACK_INTERFACE_H
 
 #include "qn_common_def.h"
+#include "qn_audio_music_mixer.h"
+#include "qn_audio_effect_mixer.h"
 
 namespace qiniu {
 class QNLocalTrack;
@@ -179,7 +181,7 @@ class QINIU_EXPORT_DLL QNLocalAudioTrack : public virtual QNLocalTrack {
   /**
    * 设置采集音频音量（不改变系统设备的音量）
    *
-   * @param 音量大小，[1.0-10.0], 默认为 1.0
+   * @param 音量大小，[0.0 - 10.0], 默认为 1.0
    */
   virtual void SetVolume(double volume) = 0;
 
@@ -196,6 +198,40 @@ class QINIU_EXPORT_DLL QNLocalAudioTrack : public virtual QNLocalTrack {
 
 class QINIU_EXPORT_DLL QNMicrophoneAudioTrack
     : public virtual QNLocalAudioTrack {
+ public:
+
+  /**
+   * 获取背景音乐混音对象实例
+   *
+   * @param music_path 背景音乐文件路径
+   * @param listener 背景音乐混音回调监听
+   * @return QNAudioMusicMixer 实例对象
+   */
+  virtual QNAudioMusicMixer* CreateAudioMusicMixer(
+      const std::string& music_path, QNAudioMusicMixerListener* listener) = 0;
+
+  /**
+   * 释放背景音乐混音对象实例
+   *
+   * @param mixer QNAudioMusicMixer 实例对象
+   */
+  virtual void DestroyAudioMusicMixer(QNAudioMusicMixer* mixer) = 0;
+
+  /**
+   * 获取音效混音对象实例
+   *
+   * @param listener 音效混音回调监听
+   * @return QNAudioEffectMixer 实例对象
+   */
+  virtual QNAudioEffectMixer* CreateAudioEffectMixer(
+      QNAudioEffectMixerListener* listener) = 0;
+
+  /**
+   * 释放音效混音对象实例
+   *
+   * @param mixer QNAudioEffectMixer 实例对象
+   */
+  virtual void DestroyAudioEffectMixer(QNAudioEffectMixer* mixer) = 0;
  protected:
   ~QNMicrophoneAudioTrack() {}
 };
@@ -278,6 +314,11 @@ class QINIU_EXPORT_DLL QNLocalVideoTrack : public virtual QNLocalTrack {
 class QINIU_EXPORT_DLL QNCameraVideoTrack : public virtual QNLocalVideoTrack {
  public:
   /**
+   * 设置摄像头事件回调
+   */
+  virtual void SetCameraEventListener(QNCameraEventListener* listener) = 0;
+
+  /**
    * 开启摄像头采集
    */
   virtual void StartCapture() = 0;
@@ -299,7 +340,7 @@ class QINIU_EXPORT_DLL QNCameraVideoTrack : public virtual QNLocalVideoTrack {
    *
    * @param object 推送图片的对象，可以是文件对象、文件路径、url，Window
    * 平台只支持文件路径, 设置为 nullptr
-时，取消推送图片，关闭图片推送，恢复摄像头采集画面
+   * 时，取消推送图片，关闭图片推送，恢复摄像头采集画面
    * @param type 图片格式，Windows 平台只支持 kImagJpeg
    */
   virtual void PushImage(void* object, QNImageType type) = 0;
